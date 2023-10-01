@@ -9,6 +9,7 @@ import {GameContext} from './components/context/GameContext'
 
 function App() {
   const { gameOn } = useContext(GameContext);
+  console.log(gameOn);
   return (
     <>
       <Routes>

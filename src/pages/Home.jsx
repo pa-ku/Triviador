@@ -1,8 +1,8 @@
-import {React, useContext} from "react";
+import { React, useContext } from "react";
 import styled from "styled-components";
 import Title from "../components/ui/Title";
 import LinkBtn from "../components/ui/LinkBtn";
-import {GameContext} from "../components/context/GameContext"
+import { GameContext } from "../components/context/GameContext";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,12 +12,16 @@ const Wrapper = styled.div`
 `;
 
 export default function Home() {
-    const { setGameOn } = useContext(GameContext);
+  const { setGameOn } = useContext(GameContext);
   return (
     <>
       <Wrapper>
         <Title text={"TRIVIADOR"} />
-        <LinkBtn onClick={setGameOn(true)} text={"START GAME"} to={"/game"} />
+        <LinkBtn
+          onClick={() => setGameOn(true)}
+          text={"START GAME"}
+          to={"/game"}
+        />
       </Wrapper>
     </>
   );
