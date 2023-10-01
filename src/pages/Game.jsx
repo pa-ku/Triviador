@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import Button from "../components/ui/Button";
 import LinkBtn from "../components/ui/LinkBtn";
 import styled from "styled-components";
 import { data } from "../data";
 import SoundMode from "../components/modes/SoundMode";
 import TofMode from "../components/modes/TofMode";
 import QuizMode from "../components/modes/QuizMode";
+import Button from "../components/ui/Button";
+import { Navigate } from "react-router-dom";
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -25,23 +26,15 @@ export default function Home() {
       setResult("Incorrecto!");
       setResultSection(true);
     }
-    if (index < data.length - 1) {
-      setIndex((prevIndex) => prevIndex + 1);
-    } else {
-      setTimeout(() => {
-        setGameOver(true);
-      }, 1000);
-    }
   }
 
   function handleNextBtn() {
     setResult("");
+    setResultSection(false);
     if (index < data.length - 1) {
       setIndex((prevIndex) => prevIndex + 1);
     } else {
-      setTimeout(() => {
-        setGameOver(true);
-      }, 1000);
+      setGameOver(true);
     }
   }
   const playHint = async (hint) => {
@@ -60,42 +53,58 @@ export default function Home() {
         <Container>
           {gameOver === false && (
             <>
-              <Title>{find.pregunta}</Title>
-              {find.type === "quiz" && (
-                <QuizMode
-                  img={find.img}
-                  onClick={handleButton}
-                  btnA={find.a}
-                  btnB={find.b}
-                  btnC={find.c}
-                  btnD={find.d}
-                />
-              )}
+              {resultSection === false && (
+                <>
+                  <Title>{find.pregunta}</Title>
+                  {find.type === "quiz" && (
+                    <QuizMode
+                      img={find.img}
+                      onClick={handleButton}
+                      btnA={find.a}
+                      btnB={find.b}
+                      btnC={find.c}
+                      btnD={find.d}
+                    />
+                  )}
 
-              {find.type === "tof" && (
-                <TofMode onClick={handleButton} img={find.img} />
-              )}
+                  {find.type === "tof" && (
+                    <TofMode onClick={handleButton} img={find.img} />
+                  )}
 
-              {find.type === "sound" && (
-                <SoundMode
-                  onClickSound1={() => playHint(find.pista1)}
-                  onClickSound2={() => playHint(find.pista2)}
-                  pista2={find.pista2}
-                  onClick={handleButton}
-                  btnA={find.a}
-                  btnB={find.b}
-                  btnC={find.c}
-                  btnD={find.d}
-                />
+                  {find.type === "sound" && (
+                    <SoundMode
+                      onClickSound1={() => playHint(find.pista1)}
+                      onClickSound2={() => playHint(find.pista2)}
+                      pista2={find.pista2}
+                      onClick={handleButton}
+                      btnA={find.a}
+                      btnB={find.b}
+                      btnC={find.c}
+                      btnD={find.d}
+                    />
+                  )}
+                </>
               )}
-              <StatusTxt>{result}</StatusTxt>
+              {resultSection === true && (
+                <>
+                  <StatusCtn>
+                    <StatusTxt>{result}</StatusTxt>
+                    <Button
+                      onClick={handleNextBtn}
+                      $btnA={true}
+                      text={"Next"}
+                    />
+                  </StatusCtn>
+                </>
+              )}
             </>
           )}
-
           {gameOver === true && (
             <>
-              <Title>{"GAME OVER"}</Title>
-              <LinkBtn text={"HOME"} to={"/"} />
+              <StatusCtn>
+                <Title>{"Bien juegado!"}</Title>
+                <LinkBtn text={"HOME"} to={"/"} />
+              </StatusCtn>
             </>
           )}
         </Container>
@@ -103,6 +112,13 @@ export default function Home() {
     </>
   );
 }
+const StatusCtn = styled.div`
+  gap: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -138,7 +154,7 @@ const Title = styled.h1`
 
 const StatusTxt = styled.p`
   color: #999;
-  font-size: 18px;
+  font-size: 25px;
   height: 20px;
   display: flex;
   align-items: center;
