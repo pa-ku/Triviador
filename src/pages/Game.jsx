@@ -4,7 +4,9 @@ import LinkBtn from "../components/ui/LinkBtn";
 import styled from "styled-components";
 import { data } from "../data";
 import { Navigate } from "react-router-dom";
-
+import soundIcon from "../assets/svg/soundIcon.svg";
+import useSound from "use-sound";
+import divididos from "../assets/sound/divididos.mp3";
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -12,10 +14,12 @@ export default function Home() {
   const [result, setResult] = useState();
   const [arrIndex, setDrrIndex] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [pista1] = useSound(divididos);
 
   function handleButton(e) {
     const answer = e.target.name;
     const res = find.respuesta;
+
     if (answer == res) {
       setResult("Correcto!");
       setTimeout(() => {
@@ -37,6 +41,10 @@ export default function Home() {
     }
   }
 
+function handleSound(){
+  pista1()
+}
+
   return (
     <>
       <Wrapper>
@@ -45,7 +53,19 @@ export default function Home() {
             <>
               <Title>{find.pregunta}</Title>
               <ImageCtn>
-                <Image src={find.img} alt="" />
+                
+                {find.type === "sound" && (
+                  <>
+                  <SoundButton onClick={handleSound}>
+
+                    <Image src={soundIcon} alt="" />
+                  </SoundButton>
+                  
+                  </>
+                )}
+
+
+                {find.type !== "sound" && <Image src={find.img} alt="" />}
               </ImageCtn>
               <ButtonContainer>
                 {find.type === "quiz" && (
@@ -93,6 +113,34 @@ export default function Home() {
                     />
                   </>
                 )}
+                {find.type === "sound" && (
+                  <>
+                    <Button
+                      onClick={handleButton}
+                      $color={"#37a332"}
+                      text={find.a}
+                      name={"a"}
+                    />
+                    <Button
+                      onClick={handleButton}
+                      $color={"#b13e3e"}
+                      text={find.b}
+                      name={"b"}
+                    />
+                    <Button
+                      onClick={handleButton}
+                      $color={"#3e6ac2"}
+                      text={find.c}
+                      name={"c"}
+                    />
+                    <Button
+                      onClick={handleButton}
+                      $color={"#9142cd"}
+                      text={find.d}
+                      name={"d"}
+                    />
+                  </>
+                )}
               </ButtonContainer>
               <StatusTxt>{result}</StatusTxt>
             </>
@@ -109,6 +157,26 @@ export default function Home() {
     </>
   );
 }
+
+
+const SoundButton = styled.button`
+border-radius:50%;
+padding:3em;
+display: flex;
+align-items: center;
+justify-content: center;
+width:200px;
+border: 2px solid white;
+height:200px;
+
+margin: auto;
+cursor: pointer;
+transition: 500ms;
+&:hover{
+scale: 1.1;
+}
+`
+const SoundIcon = styled(soundIcon)``;
 
 const Wrapper = styled.div`
   display: flex;
@@ -156,9 +224,9 @@ const ImageCtn = styled.div`
 `;
 
 const Image = styled.img`
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
-  height: 100%;
+  height: 240px;
 `;
 
 const StatusTxt = styled.p`

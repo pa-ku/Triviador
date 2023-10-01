@@ -29,4 +29,16 @@ export const data = [
         a: "",
         b: "",
     },
+    {
+        img: "",
+        pregunta: "De quien es esta cancion?",
+        respuesta: "b",
+        pista:'./assets/sound/divididos.mp3',
+        pista2:"",
+        type:"sound",
+        a: "Cerati",
+        b: "Divididos",
+        c: "Babasonicos",
+        d: "Turf",
+    },
 ]

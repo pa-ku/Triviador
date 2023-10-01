@@ -7,6 +7,8 @@ import GameOver from "./pages/GameOver";
 import { useContext } from "react";
 import {GameContext} from './components/context/GameContext'
 
+
+
 function App() {
   const { gameOn } = useContext(GameContext);
   console.log(gameOn);
