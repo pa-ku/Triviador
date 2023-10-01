@@ -118,21 +118,16 @@ const StatusCtn = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 80vh;
 `;
 
 const Wrapper = styled.div`
   display: flex;
-
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  height: 100vh;
-  @media (max-width: 700px) {
-    align-items: center;
-    justify-content: start;
-    height: 0px;
-  }
+  
 `;
 const Container = styled.div`
   max-width: 460px;
