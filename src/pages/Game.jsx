@@ -79,7 +79,7 @@ export default function Home() {
               {find.type === "sound" && (
                 <SoundMode
                   onClickSound1={() => playHint(find.pista1)}
-                  onClickSound2={() => playHint(find.pista1)}
+                  onClickSound2={() => playHint(find.pista2)}
                   pista2={find.pista2}
                   onClick={handleButton}
                   btnA={find.a}
