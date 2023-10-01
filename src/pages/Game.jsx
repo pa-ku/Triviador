@@ -12,9 +12,17 @@ export default function Home() {
   const [index, setIndex] = useState(0);
   const find = data[index];
   const [result, setResult] = useState();
-  const [arrIndex, setDrrIndex] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [pista1] = useSound(divididos);
+
+  const playHint = async (hint) => {
+    const importRes = await import(hint); // make sure the path is correct
+    var audio = new Audio(importRes.default);
+    try {
+      await audio.play();
+    } catch (err) {
+      console.log("Failed to play, error: " + err);
+    }
+  };
 
   function handleButton(e) {
     const answer = e.target.name;
@@ -41,10 +49,6 @@ export default function Home() {
     }
   }
 
-function handleSound(){
-  pista1()
-}
-
   return (
     <>
       <Wrapper>
@@ -52,21 +56,24 @@ function handleSound(){
           {gameOver === false && (
             <>
               <Title>{find.pregunta}</Title>
-              <ImageCtn>
-                
+              <QuestionCtn>
                 {find.type === "sound" && (
                   <>
-                  <SoundButton onClick={handleSound}>
-
-                    <Image src={soundIcon} alt="" />
-                  </SoundButton>
-                  
+                    <SoundCtn>
+                      <SoundButton onClick={() => playHint(find.pista1)}>
+                        <SoundTxt>Pista 1</SoundTxt>
+                        <SoundImg src={soundIcon} alt="" />
+                      </SoundButton>
+                      <SoundButton onClick={() => playHint(find.pista2)}>
+                        <SoundTxt>Pista 2</SoundTxt>
+                        <SoundImg src={soundIcon} alt="" />
+                      </SoundButton>
+                    </SoundCtn>
                   </>
                 )}
 
-
                 {find.type !== "sound" && <Image src={find.img} alt="" />}
-              </ImageCtn>
+              </QuestionCtn>
               <ButtonContainer>
                 {find.type === "quiz" && (
                   <>
@@ -158,25 +165,46 @@ function handleSound(){
   );
 }
 
-
+const SoundCtn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+gap: 2em;
+`;
+const SoundTxt = styled.p`
+  color: #fff;
+text-transform: uppercase;
+font-weight: 800;
+`;
 const SoundButton = styled.button`
-border-radius:50%;
-padding:3em;
-display: flex;
-align-items: center;
-justify-content: center;
-width:200px;
-border: 2px solid white;
-height:200px;
+  border-radius: 50%;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px solid white;
+  width: 90px;
+  width: 130px;
 
-margin: auto;
-cursor: pointer;
-transition: 500ms;
-&:hover{
-scale: 1.1;
+&:focus {
+  border: 3px solid #77ff87;
+
 }
-`
-const SoundIcon = styled(soundIcon)``;
+  cursor: pointer;
+  transition: 500ms;
+  &:hover {
+    scale: 1.1;
+  }
+`;
+
+const SoundImg = styled.img`
+  width: 80px;
+
+  height: 80px;
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -217,7 +245,7 @@ const Title = styled.h1`
   }
 `;
 
-const ImageCtn = styled.div`
+const QuestionCtn = styled.div`
   width: 100%;
   height: 240px;
   margin-bottom: 10px;
