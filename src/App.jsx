@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route index path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="*" element={<Home />} />
         <Route path="/game" element={gameOn ? <Game /> : <Home />} />
         <Route path="/gameover" element={<GameOver />} />
