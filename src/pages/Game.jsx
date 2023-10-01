@@ -137,6 +137,10 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  height: 100vh;
+  @media(max-width:700px){
+    height: 0px;
+  }
 `;
 const Container = styled.div`
   max-width: 460px;
@@ -163,4 +167,5 @@ const StatusTxt = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-transform: uppercase;
 `;
