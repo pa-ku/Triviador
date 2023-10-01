@@ -14,6 +14,7 @@ export default function SoundMode({
   return (
     <>
       <QuestionCtn>
+        {/* ■ */}
         <SoundCtn>
           <SoundButton onClick={onClickSound1}>
             <SoundTxt>Pista 1 </SoundTxt>

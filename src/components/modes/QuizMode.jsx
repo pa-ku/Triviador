@@ -2,13 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../ui/Button";
 
-export default function QuizMode({ onClick, btnA, btnB, btnC, btnD,img }) {
+export default function QuizMode({ onClick, btnA, btnB, btnC, btnD, img }) {
   return (
     <>
-    <QuestionCtn>
-    <Image src={img} alt="" />
-
-    </QuestionCtn>
+      <QuestionCtn>
+        <Image src={img} alt="" />
+      </QuestionCtn>
       <ButtonContainer>
         <Button onClick={onClick} $btnA={true} text={btnA} name={"a"} />
         <Button onClick={onClick} $btnB={true} text={btnB} name={"b"} />

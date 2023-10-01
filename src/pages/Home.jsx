@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   height: 80vh;
+  gap: 2em;
 `;
 
 export default function Home() {
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <>
       <Wrapper>
-        <Title text={"TRIVIADOR"} />
+        <Title $size={"3rem"} text={"TRIVIADOR"} />
         <LinkBtn
           onClick={() => setGameOn(true)}
           text={"START GAME"}

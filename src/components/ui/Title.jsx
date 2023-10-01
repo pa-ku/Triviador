@@ -9,12 +9,13 @@ const H1 = styled.h1`
   align-items: center;
   justify-content: center;
   color: #fff;
+  font-size: ${props => props.$size};
   @media (max-width: 700px) {
     font-size: 25px;
     width: 100%;
   }
 `;
 
-export default function Title({ text }) {
-  return <H1>{text}</H1>;
+export default function Title({ text,$size }) {
+  return <H1 $size={$size}>{text}</H1>;
 }
