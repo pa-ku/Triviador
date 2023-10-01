@@ -8,8 +8,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
       <HashRouter>
     <GameProvider>
-        <App />
+        <App/>
     </GameProvider>
-      </BrowserRouter>
+      </HashRouter>
   </React.StrictMode>
 );
