@@ -14,6 +14,8 @@ export default function Home() {
   const [result, setResult] = useState("");
   const [gameOver, setGameOver] = useState(false);
   const [resultSection, setResultSection] = useState(false);
+  const [right, setRight] = useState(0);
+  const [wrong, setRrong] = useState(0);
 
   function handleButton(e) {
     const answer = e.target.name;
@@ -22,8 +24,10 @@ export default function Home() {
     if (answer == res) {
       setResult("Correcto!");
       setResultSection(true);
+      setRight((prevState) => prevState + 1);
     } else {
       setResult("Incorrecto!");
+      setRrong((prevState) => prevState + 1);
       setResultSection(true);
     }
   }
@@ -103,6 +107,8 @@ export default function Home() {
             <>
               <StatusCtn>
                 <Title>{"Bien juegado!"}</Title>
+                <StatusTxt>Correctas: {right}</StatusTxt>
+                <StatusTxt>Incorrectas: {wrong}</StatusTxt>
                 <LinkBtn text={"HOME"} to={"/"} />
               </StatusCtn>
             </>
@@ -112,6 +118,7 @@ export default function Home() {
     </>
   );
 }
+
 const StatusCtn = styled.div`
   gap: 2em;
   display: flex;
@@ -127,7 +134,6 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  
 `;
 const Container = styled.div`
   max-width: 460px;
