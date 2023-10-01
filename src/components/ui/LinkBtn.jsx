@@ -22,6 +22,6 @@ cursor: pointer;
 text-transform: uppercase;
 `;
 
-export default function LinkBtn({ text, to }) {
-  return <LinkButton to={to}>{text}</LinkButton>;
+export default function LinkBtn({ text, to,onClick }) {
+  return <LinkButton onClick={onClick} to={to}>{text}</LinkButton>;
 }
