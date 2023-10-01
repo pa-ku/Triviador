@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function trueorfalse() {
+export default function Tof() {
   return (
     <div>trueorfalse</div>
   )

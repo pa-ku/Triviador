@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "../components/ui/Button";
 import LinkBtn from "../components/ui/LinkBtn";
 import styled from "styled-components";
 import { data } from "../data";
-import { Navigate } from "react-router-dom";
-import soundIcon from "../assets/svg/soundIcon.svg";
-import useSound from "use-sound";
-import divididos from "../assets/sound/divididos.mp3";
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -61,12 +57,12 @@ export default function Home() {
                   <>
                     <SoundCtn>
                       <SoundButton onClick={() => playHint(find.pista1)}>
-                        <SoundTxt>Pista 1</SoundTxt>
-                        <SoundImg src={soundIcon} alt="" />
+                        <SoundTxt>Pista 1 </SoundTxt>
+                        <SoundIcon>▶</SoundIcon>
                       </SoundButton>
                       <SoundButton onClick={() => playHint(find.pista2)}>
                         <SoundTxt>Pista 2</SoundTxt>
-                        <SoundImg src={soundIcon} alt="" />
+                        <SoundIcon>▶</SoundIcon>
                       </SoundButton>
                     </SoundCtn>
                   </>
@@ -79,25 +75,26 @@ export default function Home() {
                   <>
                     <Button
                       onClick={handleButton}
-                      $color={"#37a332"}
+                      $btnA={true}
                       text={find.a}
                       name={"a"}
                     />
                     <Button
                       onClick={handleButton}
-                      $color={"#b13e3e"}
+                      $btnB={true}
                       text={find.b}
                       name={"b"}
                     />
+
                     <Button
+                      $btnC={true}
                       onClick={handleButton}
-                      $color={"#3e6ac2"}
                       text={find.c}
                       name={"c"}
                     />
                     <Button
+                      $btnD={true}
                       onClick={handleButton}
-                      $color={"#9142cd"}
                       text={find.d}
                       name={"d"}
                     />
@@ -108,13 +105,14 @@ export default function Home() {
                   <>
                     <Button
                       onClick={handleButton}
-                      $color={"#37a332"}
+                      $btnA={true}
                       text={"VERDADERO"}
                       name={"a"}
                     />
                     <Button
                       onClick={handleButton}
-                      $color={"#b13e3e"}
+                      $btnB={true}
+                      buttonB={true}
                       text={"FALSO"}
                       name={"b"}
                     />
@@ -124,25 +122,25 @@ export default function Home() {
                   <>
                     <Button
                       onClick={handleButton}
-                      $color={"#37a332"}
+                      $btnA={true}
                       text={find.a}
                       name={"a"}
                     />
                     <Button
                       onClick={handleButton}
-                      $color={"#b13e3e"}
+                      $btnB={true}
                       text={find.b}
                       name={"b"}
                     />
                     <Button
                       onClick={handleButton}
-                      $color={"#3e6ac2"}
+                      $btnC={true}
                       text={find.c}
                       name={"c"}
                     />
                     <Button
                       onClick={handleButton}
-                      $color={"#9142cd"}
+                      $btnD={true}
                       text={find.d}
                       name={"d"}
                     />
@@ -171,12 +169,13 @@ const SoundCtn = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-gap: 2em;
+  gap: 2em;
 `;
 const SoundTxt = styled.p`
   color: #fff;
-text-transform: uppercase;
-font-weight: 800;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 20px;
 `;
 const SoundButton = styled.button`
   border-radius: 50%;
@@ -186,24 +185,25 @@ const SoundButton = styled.button`
   justify-content: center;
   flex-direction: column;
   border: 3px solid white;
-  width: 90px;
-  width: 130px;
-
-&:focus {
-  border: 3px solid #77ff87;
-
-}
+  min-width: 150px;
+  min-height: 150px;
   cursor: pointer;
-  transition: 500ms;
+  transition: 200ms;
+
+  &:focus * {
+    color: #00ff1e;
+  }
+  &:focus {
+    border: 3px solid #00ff1e;
+  }
   &:hover {
-    scale: 1.1;
+    filter: brightness(1.5);
   }
 `;
 
-const SoundImg = styled.img`
-  width: 80px;
-
-  height: 80px;
+const SoundIcon = styled.p`
+  font-size: 30px;
+  color: #fff;
 `;
 
 const Wrapper = styled.div`
@@ -229,6 +229,8 @@ const ButtonContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   height: 200px;
   width: 100%;
+  gap: 1em;
+  padding-inline: 10px;
 `;
 
 const Title = styled.h1`
