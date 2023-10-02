@@ -139,7 +139,7 @@ const Wrapper = styled.div`
   text-align: center;
   height: 100vh;
   @media(max-width:700px){
-    height: 0px;
+    height: 80vh;
   }
 `;
 const Container = styled.div`
